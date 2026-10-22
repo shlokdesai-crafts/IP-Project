@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaStock - Pharmacy Inventory Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using Google Fonts for clean typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="logo">💊 PharmaStock</span>
+            <span class="subtitle">Pharmacy Inventory Management System</span>
+        </div>
+        <div class="navbar-right nav-links">
+            <a href="#dashboard" class="active">Dashboard</a>
+            <a href="#inventory">Medicines</a>
+            <a href="#inventory">Inventory</a>
+            <a href="#dashboard">Suppliers</a>
+            <a href="#low-stock">Low Stock</a>
+            <a href="#alerts">Expiry</a>
+            <a href="#dashboard">Reports</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        
+        <!-- Main Content Area -->
+        <main class="content">
+            
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section">
+                <div class="section-header">
+                    <h2>Pharmacy Dashboard</h2>
+                    <p>Manage medicines, stock levels and expiry dates.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <!-- Card 1 -->
+                    <div class="stat-card">
+                        <div class="stat-icon">💊</div>
+                        <div class="stat-info">
+                            <h3>Total Medicines</h3>
+                            <p id="total-medicines">125</p>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-info">
+                            <h3>Available Stock</h3>
+                            <p>1,840</p>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-info">
+                            <h3>Low Stock</h3>
+                            <p>12</p>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="stat-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-info">
+                            <h3>Expiring Soon</h3>
+                            <p>8</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid-layout">
+                <!-- Main left column -->
+                <div class="main-column">
+                    <!-- Inventory Table Section -->
+                    <section id="inventory" class="section card">
+                        <div class="section-header flex-between">
+                            <h2>Medicine Inventory</h2>
+                            <div class="search-box">
+                                🔍 <input type="text" id="searchInput" placeholder="Search medicines...">
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table id="inventoryTable">
+                                <thead>
+                                    <tr>
+                                        <th>Medicine Name</th>
+                                        <th>Category</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Expiry Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Paracetamol 500mg</td>
+                                        <td>Pain Relief</td>
+                                        <td>120</td>
+                                        <td>₹25</td>
+                                        <td>12/08/2027</td>
+                                        <td><span class="badge badge-success">In Stock</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amoxicillin 250mg</td>
+                                        <td>Antibiotic</td>
+                                        <td>45</td>
+                                        <td>₹80</td>
+                                        <td>05/03/2027</td>
+                                        <td><span class="badge badge-success">In Stock</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cetirizine 10mg</td>
+                                        <td>Allergy</td>
+                                        <td>18</td>
+                                        <td>₹40</td>
+                                        <td>20/11/2026</td>
+                                        <td><span class="badge badge-warning">Low Stock</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Azithromycin 500mg</td>
+                                        <td>Antibiotic</td>
+                                        <td>10</td>
+                                        <td>₹95</td>
+                                        <td>15/10/2026</td>
+                                        <td><span class="badge badge-warning">Low Stock</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vitamin C</td>
+                                        <td>Supplement</td>
+                                        <td>90</td>
+                                        <td>₹60</td>
+                                        <td>18/06/2027</td>
+                                        <td><span class="badge badge-success">In Stock</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Add Medicine Section -->
+                    <section id="add-medicine" class="section card">
+                        <h2>Add New Medicine</h2>
+                        <div id="successMessage" class="success-message" style="display: none;">
+                            ✅ Medicine added successfully!
+                        </div>
+                        <form id="addMedicineForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="medName">Medicine Name</label>
+                                    <input type="text" id="medName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="medCategory">Category</label>
+                                    <input type="text" id="medCategory" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="medBatch">Batch Number</label>
+                                    <input type="text" id="medBatch">
+                                </div>
+                                <div class="form-group">
+                                    <label for="medQuantity">Quantity</label>
+                                    <input type="number" id="medQuantity" required min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="medPrice">Price</label>
+                                    <input type="text" id="medPrice" placeholder="₹" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="medExpiry">Expiry Date</label>
+                                    <input type="date" id="medExpiry" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="medSupplier">Supplier</label>
+                                    <input type="text" id="medSupplier">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">+ Add Medicine</button>
+                        </form>
+                    </section>
+                </div>
+
+                <!-- Side column -->
+                <div class="side-column">
+                    <!-- Low Stock Section -->
+                    <section id="low-stock" class="section card">
+                        <h2>Low Stock Medicines</h2>
+                        <ul class="simple-list">
+                            <li class="flex-between">
+                                <span>Cetirizine 10mg</span>
+                                <span class="badge badge-warning">18 units</span>
+                            </li>
+                            <li class="flex-between">
+                                <span>Azithromycin 500mg</span>
+                                <span class="badge badge-warning">10 units</span>
+                            </li>
+                            <li class="flex-between">
+                                <span>Ibuprofen 400mg</span>
+                                <span class="badge badge-warning">15 units</span>
+                            </li>
+                        </ul>
+                        <button class="btn-secondary w-100 mt-3">View All</button>
+                    </section>
+
+                    <!-- Expiry Alert Section -->
+                    <section id="alerts" class="section card">
+                        <h2>Expiry Alerts</h2>
+                        <ul class="alert-list">
+                            <li class="alert-item">
+                                <strong>Azithromycin 500mg</strong>
+                                <span>Expires: 15/10/2026</span>
+                            </li>
+                            <li class="alert-item">
+                                <strong>Cetirizine 10mg</strong>
+                                <span>Expires: 20/11/2026</span>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 PharmaStock | Pharmacy Inventory Management System</p>
+    </footer>
+
+    <script type="module" src="/script.js"></script>
+</body>
+</html>
